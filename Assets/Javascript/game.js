@@ -12,29 +12,38 @@ var userChoiceText = document.getElementById("userchoice-text");
 var lossesText = document.getElementById("losses-text");
 var winsText = document.getElementById("wins-text");
 var guessesText = document.getElementById("guesses-text");
+var guessesText2 = document.getElementById("guesses2-text");
 
+//display
+var userChoices = [];
 //functions
-document.onkeyup = function(event) {
+document.onkeyup = function (event) {
 
-    userGuess = event.key;
+    var userGuess = event.key;
+    userChoices.push(userGuess)
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-    computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-
-    if (event.key === computerChoices) {
+    if (userGuess === computerGuess) {
         wins++;
+        userChoices = [];
+        guesses = 9;
     }
 
-    else if (event.key === computerChoices) {
+    else if (guesses === 0) {
         losses++;
+        userChoices = [];
+        guesses = 9;
     }
-    else if (event.key) {
+    else {
 
-        guesses;
+        guesses--;
     }
 
     userChoiceText.textContent = "Your Choice: " + userGuess;
+    guessesText2.textContent = "You Guessed: " + userChoices;
     winsText.textContent = "Your Wins: " + wins;
     lossesText.textContent = "Your Losses: " + losses;
     guessesText.textContent = "Remaining Guesses: " + guesses;
+
 };
